@@ -15,14 +15,14 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('criteria.index') }}" :active="request()->routeIs('criteria.index')">
+                    <x-nav-link href="{{ route('criteria.index') }}" :active="request()->routeIs('criteria.*')">
                         {{ __('Data Kriteria') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('employee') }}" :active="request()->routeIs('employee')">
+                    <x-nav-link href="{{ route('employee.index') }}" :active="request()->routeIs('employee.*')">
                         {{ __('Data Alternatif Karyawan') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('all_data') }}" :active="request()->routeIs('all_data')">
-                        {{ __('Semua Data') }}
+                        {{ __('Proses SPK') }}
                     </x-nav-link>
                 </div>
             </div>

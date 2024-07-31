@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="mt-4 text-gray-500">
-                            <x-buttons.primary>
+                            <x-buttons.primary class="text-xs">
                                 {{ __('Simpan') }}
                             </x-buttons.primary>
                             <a href="{{ route('criteria.index') }}">
