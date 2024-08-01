@@ -63,7 +63,7 @@ class CriteriaController extends Controller
         $criteria = Criteria::find($id);
         $criteria->name = $request->name;
         $criteria->weight = $request->weight;
-        $criteria->type= $request->type;
+        $criteria->type = $request->type;
         $criteria->save();
 
         return redirect()->route('criteria.index');
@@ -75,6 +75,8 @@ class CriteriaController extends Controller
     public function destroy(string $id)
     {
         $criteria = Criteria::findOrFail($id);
+        $criteria->alternates()->delete();
+        $criteria->finals()->delete();
         $criteria->delete();
 
         return redirect()->route('criteria.index');

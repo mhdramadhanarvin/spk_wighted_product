@@ -22,14 +22,14 @@
                 @if (count($action) > 0)
                 <td align="center">
                     @isset ($action['edit'])
-                    <a href="{{ route($action['edit'] . '.edit', $result) }}">
+                    <a href="{{ route($action['edit'] . '.edit', $result['id']) }}">
                         <x-buttons.primary class="text-xs">
                             Ubah
                         </x-buttons.primary>
                     </a>
                     @endisset
                     @isset ($action['delete'])
-                    <form method="POST" action="{{ route($action['delete'] . '.destroy', $result) }}" class="inline">
+                    <form method="POST" action="{{ route($action['delete'] . '.destroy', $result['id']) }}" class="inline">
                         @method('DELETE')
                         @csrf
                         <x-buttons.danger onclick="return confirm('Yakin ingin hapus?')" class="text-xs">

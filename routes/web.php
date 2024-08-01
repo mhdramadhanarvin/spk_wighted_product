@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CriteriaController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +19,7 @@ Route::middleware([
 
     Route::get('/criteria/sync', [CriteriaController::class, 'sync'])->name('criteria.sync');
     Route::resource('criteria', CriteriaController::class);
-    Route::get('/employee', [CriteriaController::class, 'index'])->name('employee');
+    Route::resource('employee', EmployeeController::class);
+    // Route::get('/employee', [CriteriaController::class, 'index'])->name('employee');
     Route::get('/data', [CriteriaController::class, 'index'])->name('all_data');
 });
