@@ -16,4 +16,9 @@ class Employee extends Model
     {
         return $this->hasMany(AlternateResult::class);
     }
+
+    public function finals(): HasMany
+    {
+        return $this->hasMany(FinalResult::class);
+    }
 }

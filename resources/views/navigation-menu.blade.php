@@ -21,7 +21,7 @@
                     <x-nav-link href="{{ route('employee.index') }}" :active="request()->routeIs('employee.*')">
                         {{ __('Data Alternatif Karyawan') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('all_data') }}" :active="request()->routeIs('all_data')">
+                    <x-nav-link href="{{ route('wp.index') }}" :active="request()->routeIs('wp.*')">
                         {{ __('Proses SPK') }}
                     </x-nav-link>
                 </div>

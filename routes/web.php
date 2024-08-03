@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\WPController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +21,6 @@ Route::middleware([
     Route::get('/criteria/sync', [CriteriaController::class, 'sync'])->name('criteria.sync');
     Route::resource('criteria', CriteriaController::class);
     Route::resource('employee', EmployeeController::class);
-    // Route::get('/employee', [CriteriaController::class, 'index'])->name('employee');
-    Route::get('/data', [CriteriaController::class, 'index'])->name('all_data');
+    Route::get('/wp', [WPController::class, 'index'])->name('wp.index');
+    Route::get('/wp/print', [WPController::class, 'print'])->name('wp.print');
 });
