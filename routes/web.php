@@ -3,10 +3,12 @@
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\WPController;
+use App\Models\Criteria;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
 Route::middleware([
@@ -15,7 +17,9 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $employee = Employee::count();
+        $criteria = Criteria::count();
+        return view('dashboard', compact('employee', 'criteria'));
     })->name('dashboard');
 
     Route::get('/criteria/sync', [CriteriaController::class, 'sync'])->name('criteria.sync');

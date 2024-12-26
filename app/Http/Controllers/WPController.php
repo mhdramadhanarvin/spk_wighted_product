@@ -41,15 +41,15 @@ class WPController extends Controller
                 'id' => $employee->id,
                 'name' => $employee->name,
             ];
-            $total = 0;
+            $total = 1;
 
             foreach ($criteria as $cr) {
                 $alternateResult = $employee->alternates->firstWhere('criteria_id', $cr->id);
-                $weight = $alternateResult ? round($alternateResult->value ** $cr->normal_weight, 3) : 0;
+                $weight = $alternateResult ? number_format($alternateResult->value ** $cr->normal_weight, 3) : 0;
                 $result[$cr->id] = $weight;
-                $total += $weight;
+                $total *= $weight;
             }
-            $result['total'] = $total;
+            $result['total'] = number_format($total, 3);
 
             return $result;
         });
@@ -85,7 +85,7 @@ class WPController extends Controller
         $employees = Employee::with('alternates.criteria')->get();
         $criteria = Criteria::orderBy('id')->get();
 
-        $fpdf = new Fpdf;
+        $fpdf = new Fpdf();
         $fpdf->AddPage();
         $fpdf->SetFont('Arial', '', 11);
         $fpdf->SetTitle("Hasil Perangkingan SPK SAW");
@@ -109,12 +109,12 @@ class WPController extends Controller
         $record = $employees->map(function ($employee) use ($criteria) {
             $result[] = $employee->name;
 
-            $total = 0;
+            $total = 1;
             foreach ($criteria as $cr) {
                 $alternateResult = $employee->finals->firstWhere('criteria_id', $cr->id);
                 $value = $alternateResult ? $alternateResult->value : 0;
                 $result[] = $value;
-                $total += $value;
+                $total *= $value;
             }
             $result[] = $total;
 
@@ -151,9 +151,9 @@ class WPController extends Controller
             $defaultWidth = 190;
             if ($keyH == count($header) - 1) { //last record
                 $width = $defaultWidth * 0.12;
-            } else if ($keyH == 0) { //first column
+            } elseif ($keyH == 0) { //first column
                 $width = $defaultWidth * 0.07;
-            } else if ($keyH > 1) { //criteria column
+            } elseif ($keyH > 1) { //criteria column
                 $width = ($defaultWidth * 0.5) / $criteria->count();
             } else {
                 $width = $defaultWidth * 0.32; //employee name (second column)
@@ -168,9 +168,9 @@ class WPController extends Controller
                 $defaultWidth = 190;
                 if ($keyR == count($header) - 1) { //last record
                     $width = $defaultWidth * 0.12;
-                } else if ($keyR == 0) { //first column
+                } elseif ($keyR == 0) { //first column
                     $width = $defaultWidth * 0.07;
-                } else if ($keyR > 1) { //criteria column
+                } elseif ($keyR > 1) { //criteria column
                     $width = ($defaultWidth * 0.5) / $criteria->count();
                 } else {
                     $width = $defaultWidth * 0.32; //employee name (second column)
