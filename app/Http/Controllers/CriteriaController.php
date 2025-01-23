@@ -89,7 +89,7 @@ class CriteriaController extends Controller
         foreach ($criteria as $value) {
             $criteriaFind = Criteria::find($value['id']);
             $sum = collect($criteria)->sum('weight');
-            $criteriaFind->normal_weight = $value->type == 'benefit' ? round($value->weight / $sum, 2) * 1 : round($value->weight / $sum, 2) * -1;
+            $criteriaFind->normal_weight = $value->type == 'benefit' ? number_format($value->weight / $sum, 3) * 1 : number_format($value->weight / $sum, 3) * -1;
             $criteriaFind->save();
         }
 

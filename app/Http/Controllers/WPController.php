@@ -72,7 +72,7 @@ class WPController extends Controller
         $final = $vectorS->map(function ($data) use ($totalVectorS) {
             return collect([
                 'name' => $data['name'],
-                'result' => round($data['total'] / $totalVectorS, 3)
+                'result' => number_format($data['total'] / $totalVectorS, 3)
             ]);
         });
         $final = $final->sortBy('result', null, true);
@@ -127,7 +127,7 @@ class WPController extends Controller
         $recordWithFinal = $record->map(function ($r) use ($totalValue) {
             $data = [
                 ...$r,
-                round(collect($r)->last() / $totalValue, 3)
+                number_format(collect($r)->last() / $totalValue, 3)
             ];
             $collect = collect($data);
 
